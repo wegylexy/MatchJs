@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "noImplicitAny": true,
+    "noEmitOnError": true,
+    "alwaysStrict": true,
+    "removeComments": false,
+    "sourceMap": true,
+    "target": "es5",
+    "outFile": "wwwroot/bundle.js"
+  },
+  "compileOnSave": true,
+  "exclude": [
+    "node_modules",
+    "wwwroot"
+  ]
+}

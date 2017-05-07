@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>MatchJs</title>
+	<link href="bundle.css" rel="stylesheet" />
+	<script src="bundle.js"></script>
+	<script id="vs" type="x-shader/x-vertex">
+		varying vec2 v_coor;
+		attribute vec2 a_coor;
+
+		void main() {
+		v_coor = a_coor;
+		gl_Position = vec4(a_coor * 2.0 - 1.0, 0, 1);
+		}
+	</script>
+	<script id="fs" type="x-shader/x-fragment">
+		precision mediump float;
+
+		const mat4 rgb2yuv = mat4(
+		.257, .439, -.148, 0,
+		.504, -.368, -.291, 0,
+		.098, -.071, .439, 0,
+		.0625, .5, .5, 1
+		);
+
+		varying vec2 v_coor;
+		uniform sampler2D u_img;
+
+		void main() {
+		float y = (rgb2yuv * texture2D(u_img, v_coor)).x;
+		y = y * 2.0 - .5;
+		gl_FragColor = vec4(y, y, y, 1);
+		}
+	</script>
+</head>
+<body>
+	<img id="sample01" style="display:none" />
+	<canvas id="c2d"></canvas>
+	<canvas id="cWGL"></canvas>
+</body>
+</html>
